@@ -3,13 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hesdhashdallo World App</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Simple Calculator App">
+    <title>Calculator App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+        }
+        .calculator {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            width: 100%;
+            padding: 20px;
+        }
+        .screen {
+            width: 100%;
+            height: 60px;
+            background: #f9f9f9;
+            border: none;
+            text-align: right;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            outline: none;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+        .button {
+            height: 60px;
+            font-size: 1.2rem;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+        .button.operation {
+            background: #007bff;
+        }
+        .button.operation:hover {
+            background: #0056b3;
+        }
+        .button.clear {
+            background: #f44336;
+        }
+        .button.clear:hover {
+            background: #d32f2f;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <h1 id="hello-message">Hello World!</h1>
+    <div class="calculator">
+        <input type="text" id="screen" class="screen" disabled>
+        <div class="buttons">
+            <button class="button" onclick="appendValue('7')">7</button>
+            <button class="button" onclick="appendValue('8')">8</button>
+            <button class="button" onclick="appendValue('9')">9</button>
+            <button class="button operation" onclick="appendValue('/')">/</button>
+            <button class="button" onclick="appendValue('4')">4</button>
+            <button class="button" onclick="appendValue('5')">5</button>
+            <button class="button" onclick="appendValue('6')">6</button>
+            <button class="button operation" onclick="appendValue('*')">*</button>
+            <button class="button" onclick="appendValue('1')">1</button>
+            <button class="button" onclick="appendValue('2')">2</button>
+            <button class="button" onclick="appendValue('3')">3</button>
+            <button class="button operation" onclick="appendValue('-')">-</button>
+            <button class="button" onclick="appendValue('0')">0</button>
+            <button class="button" onclick="appendValue('.')">.</button>
+            <button class="button operation" onclick="calculateResult()">=</button>
+            <button class="button operation" onclick="appendValue('+')">+</button>
+            <button class="button clear" onclick="clearScreen()">C</button>
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const screen = document.getElementById('screen');
+
+        function appendValue(value) {
+            screen.value += value;
+        }
+
+        function clearScreen() {
+            screen.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                screen.value = eval(screen.value);
+            } catch (error) {
+                screen.value = 'Error';
+            }
+        }
+    </script>
 </body>
 </html>
